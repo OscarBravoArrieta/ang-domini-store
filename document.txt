@@ -9,6 +9,9 @@ https://www.youtube.com/watch?v=tpS5w5tic_U
         "@envs/*": ["environments/*"],
     },
 
+Componentes de tailwin gratis
+https://tailblocks.cc/
 
 
-28:00
+
+59:00

@@ -1,18 +1,16 @@
  import { Component, inject } from '@angular/core'
  import { CommonModule } from '@angular/common'
  import { RouterOutlet } from '@angular/router'
- import { ProductsService } from './api/products.service'
+ import { HeaderComponent } from "./layout/header/header.component";
 
  @Component({
-     selector: 'app-root',
-     standalone: true,
-     imports: [CommonModule, RouterOutlet],
-     templateUrl: './app.component.html',
-     styleUrl: './app.component.scss'
- })
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    imports: [CommonModule, RouterOutlet, HeaderComponent]
+})
  export class AppComponent {
      title = 'ang-domini-store'
 
-     private readonly productService = inject(ProductsService)
-     products = this.productService.products
  }
