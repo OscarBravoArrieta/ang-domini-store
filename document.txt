@@ -13,5 +13,17 @@ Componentes de tailwin gratis
 https://tailblocks.cc/
 
 
+para poder trabajar con parametros en la ruta...   en el tsconfig  withComponentInputBinding()
 
-59:00
+
+export const appConfig: ApplicationConfig = {
+     providers: [
+         provideRouter(routes, withComponentInputBinding()),
+         provideHttpClient(withFetch())
+     ]
+ }
+
+
+
+
+01:18
