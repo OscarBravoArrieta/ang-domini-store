@@ -15,7 +15,7 @@
 
      @Output() addToCartEvent = new EventEmitter<Product>()
 
-     onAddToCart () {
+     onAddToCart(): void {
 
          this.addToCartEvent.emit(this.product())
          

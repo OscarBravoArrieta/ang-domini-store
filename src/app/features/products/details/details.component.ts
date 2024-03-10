@@ -2,6 +2,7 @@
  import { Component, OnInit, Signal, inject, input } from '@angular/core'
  import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
  import { Product } from '@shared/model/product.interface'
+ import { CartStore } from '@shared/store/shoping-cart.store'
  import { ProductsService } from 'app/api/products.service'
 
  @Component({
@@ -16,6 +17,7 @@
      starsArray: number[] = new Array(5).fill(0)
      productId  = input<number>(0, { alias: 'id'})
      product!: Signal<Product | undefined>
+     cartStore = inject(CartStore)
      private readonly ProductService = inject(ProductsService)
      private readonly sanitizer = inject(DomSanitizer)
 
@@ -32,6 +34,8 @@
 
      onAddToCart () {
 
+         this.cartStore.addToCart(this.product() as Product)
+         
      }
 
      // -------------------------------------------------------------------------------------------

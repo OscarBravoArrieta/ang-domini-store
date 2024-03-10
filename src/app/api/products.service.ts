@@ -2,7 +2,7 @@
  import { EnvironmentInjector, Injectable, inject, runInInjectionContext, signal } from '@angular/core'
  import { environment } from '@envs/environment.development'
  import { Product } from '@shared/model/product.interface'
- import { tap } from 'rxjs'
+ import { map, tap } from 'rxjs'
  import { toSignal } from '@angular/core/rxjs-interop'
 
  @Injectable({
@@ -23,7 +23,10 @@
      getProducts() {
 
          this.http.get<Product[]>(`${this.endPoint}/products/?sort=desc`)
-             .pipe(tap((data: Product[]) => this.products.set(data)))
+             .pipe(
+                 map((products: Product[]) => products.map((product: Product) =>({...product, quantity: 1}))
+                 ),
+                 tap((products: Product[]) => this.products.set(products)))
              .subscribe()
 
      }
