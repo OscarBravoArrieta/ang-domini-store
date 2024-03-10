@@ -26,4 +26,4 @@ export const appConfig: ApplicationConfig = {
 
 
 
-01:18
+01:35
