@@ -28,7 +28,17 @@ import { patchState, signalStore, withComputed, withMethods, withState } from "@
      })),
      withMethods(({ products, ...store }) => ({
          addToCart(product: Product){
-             patchState(store, { products: [...products(), product]})
+             const isProductInCart = products().find((item: Product) => item.id === product.id)
+             if(isProductInCart) {
+
+                 isProductInCart.quantity++
+                 isProductInCart.subTotal = isProductInCart.quantity * isProductInCart.price
+                 patchState(store, { products: [...products()]})
+
+             } else {
+                 patchState(store, { products: [...products(), product]})
+             }
+
          },
          removeFromCart(id: number){
              const updateProducts = products().filter(product => product.id != id)
@@ -41,7 +51,7 @@ import { patchState, signalStore, withComputed, withMethods, withState } from "@
  )
 
   function calculateTotalAmount(products: Product[]): number{
-     return products.reduce((acc, products) => acc + products.price, 0)
+     return products.reduce((acc, products) => acc + products.price * products.quantity, 0)
   }
   function calculateProductCount(products: Product[]): number {
      return products.reduce((acc, products) => acc + products.quantity, 0)
