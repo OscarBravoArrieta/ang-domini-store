@@ -26,4 +26,4 @@ export const appConfig: ApplicationConfig = {
 ng add @ngrx/signals@latest
 
 
-02:06
+02:12

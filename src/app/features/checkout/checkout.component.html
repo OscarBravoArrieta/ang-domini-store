@@ -5,11 +5,11 @@
              <h1 class="mb-2 text-3xl font-mediumn text-gray-900 sm:text4xl title-font">Checkout page</h1>
 
          </div>
-         <!-- @if(cartStore.productsCount()) { -->
+         @if(cartStore.productsCount()) {
              <div class="w-full mx-auto overfluw-auto lg:w-2/3">
                  <div class="flex justify-end p-2">
                      <button class="flex px-8 py-2 text-lg text-white bg-orange-500 border-0 rounded focus:outline-none hover:bg-red-600">
-                          All
+                          Clear all
                      </button>
                  </div>
                  <table class="w-full text-lef whitespace-nowrap table-auto">
@@ -19,20 +19,57 @@
                              <th class="px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-100 roundet-tl rounded-bl title-font">Name</th>
                              <th class="px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-100 title-font">Quantity</th>
                              <th class="px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-100 title-font">Price</th>
-                             <th class="px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-100 title-font"></th>
+                             <th class="px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-100 title-font">Actions</th>
 
                          </tr>
                      </thead>
                      <tbody>
-                         @for(item of cartStore){
-
+                         @for(item of cartStore.products(); track $index){
+                             <tr>
+                                 <td class="px-4 py-3">{{ item.title }}</td>
+                                 <td class="px-4 py-3">{{ item.quantity }}</td>
+                                 <td class="px-4 py-3 text-lg text-gray-900">{{ item.price | currency }}</td>
+                                 <td>
+                                     <button
+                                         class="flex px-2 text-white bg-orange-500 border-o rounded focus:outline-nonen hover:bg-red-600"
+                                         (click)="removeItem(item.id)"
+                                         >
+                                         X
+                                     </button>
+                                </td>
+                             </tr>
                          }
                      </tbody>
+                     <tfoot>
+                         <tr>
+                             <td colspan="4">
+
+                             </td>
+                         </tr>
+                         <td colspan="2">
+                             Total
+                         </td>
+                         <td class="px-4 py-3 text-lg non-italic font-bold text-gray-900">
+                             {{cartStore.totalAmount() | currency}}
+                         </td>
+                     </tfoot>
 
                  </table>
 
              </div>
-         <!-- } -->
+             <div class="flex w-full pl-4 mx-auto mt-4 lg:w-2/3">
+                 <button (click)="onProceedToPay()" class="flex px-6 py-2 ml-auto tetx-white bg-orange-500 border-0 rounded focus:outline-none hover:bg-orange-600">
+                     Pay
+                 </button>
+             </div>
+         }@else {
+             <div class="flex flex-col w-full mb-20 text-center">
+                 <h3 class="my-2 text-3xl font-medium text-gray-900 sm:text-4xl title-font">
+                    The shoping cart is empty
+                 </h3>
+
+             </div>
+         }
 
      </div>
 
