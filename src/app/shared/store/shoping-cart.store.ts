@@ -24,7 +24,7 @@ import { patchState, signalStore, withComputed, withMethods, withState } from "@
      withState(initialState),
      withComputed(( { products }) => ({
          productsCount: computed(()=>calculateProductCount(products())),
-         totalAmount: computed(()=>calculateTotalAmount(products())),
+         totalAmount: computed(()=>(products())),
      })),
      withMethods(({ products, ...store }) => ({
          addToCart(product: Product){
